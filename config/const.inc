@@ -1,0 +1,59 @@
+<?php
+define('STATIC_SERVER','');
+define('THAPTHANH_STATIC_SERVER','http://alphaart.vn/');
+define('HOME_URL','http://game.tamtay.vn');
+define('DOCUMENT_BASE_URL', 'newgame.tamtay.vn');
+
+define('POST_NEWS_PERM', 'post news');
+define('MOD_GAME_PERM', 'mod game');
+
+define('IMAGE_VIRTUAL_PREFIX','http://game.tamtay.vn/uploads/');
+define('IMAGE_LOCAL_PATH','/var/www/domains/newgame.tamtay.vn/public/uploads/');
+
+define('IMAGE_MAX_FILESIZE',1048576);
+define('GAME_THUMB_MAX_X',540);
+define('GAME_THUMB_MAX_Y', 200);
+
+define('UPLOAD_MAXFILESIZE', 1*1024*1024);
+define('IMAGE_THUMB_MAX_X', 200);
+define('IMAGE_THUMB_MAX_Y', 188);
+define('AVATAR_QUALITY', 85); 
+define('AVATAR_URL_PREFIX','http://a0.ttimg.vn/ava/');
+define('IMG_SERVER', 'http://a0.ttimg.vn');
+
+define('CAPTCHA_BASE_IMG_PATH','images/captcha/captcha.png');  
+
+define('NEWS_PER_PAGE', 10);                    
+define('NO_OLDER_NEWS', 8);                    
+define('NO_NEWEST_ANNOUNCEMENT', 4);                    
+define('NO_PROMOTED_GAME', 6);                    
+define('NO_NEWEST_GAME', 6);                    
+define('INDEX_NEWS_NUMBER', 5);
+define('PROMOTED_NEWS_LIMIT',3);
+define('ADMIN_NEWS_LIMIT',20);
+define('DOMAIN_NAME','alphaart.vn');
+
+define('LAYOUT_FRONTPAGE', 'layouts/muoi.phtml');
+define('THAPTHANH_COOKIE_DOMAIN', 'alphaart.vn');
+define('GROUP_URL', 'http://alphaart.vn');
+define('GROUP_URL_IMAGE', 'http://alphaart.vn/data/images/');
+define('IDS_URL', 'http://ids.alphaart.vn');
+define('APPS_URL', 'http://alphaart.vn');
+define('THAPTHANH_URL', 'http://alphaart.vn');
+define('THAPTHANH_SUPPORT', 'http://alphaart.vn');
+define('LIMIT_FRIEND',50);
+
+define('IS_VIP',400);
+define('VIP_ONLY',1);
+define('SHOW_ONLY',2);
+define('VIP_DONG',100);
+define('VIP_BAC',400);
+define('VIP_VANG',1000);
+define('VIP_KIMCUONG',5000);
+
+
+
+
+
+
+ 

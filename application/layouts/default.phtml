@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-gb" xml:lang="en-gb">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><?=TITLE?></title>
+
+<?php
+	$user = $this->getActionController()->getUser();
+?>
+
+
+<link href="<?= STATIC_SERVER ?>/template/default/css/style.css" rel="stylesheet" type="text/css" media="screen, projection">
+<script type="text/javascript" src="<?= STATIC_SERVER ?>/js/jquery.js"></script>
+</head>
+
+<body id="phpbb" class="section-index ltr js">
+
+<div class="noise">
+    <div id="wrap" style="width: 80%;">
+    
+    <div id="header">
+        <div class="float-left">
+            <h1><?php echo ucfirst(DOMAIN_NAME) ?></h1>
+        </div>
+        
+        
+        <div class="float-right">
+            <div class="quicksearch">
+                <!--
+                    <form action="#" method="get" id="search">
+                        <fieldset>
+                            <input name="keywords" id="keywords" type="text" maxlength="128" value="Search…" onclick="if(this.value==&#39;Search…&#39;)this.value=&#39;&#39;;" onblur="if(this.value==&#39;&#39;)this.value=&#39;Search…&#39;;">
+                            <input type="hidden" name="style" value="875">
+                        </fieldset>
+                    </form>
+                 -->   
+                </div>
+            </div>
+        <div style="clear: both;"></div>
+    </div><!-- /header --><div style="clear: both;"></div>
+<div id="nav-wrap-left"></div>
+<div id="nav-wrap-right"></div>
+
+<div id="nav">
+    <ul>
+
+            <li class="active">
+                <a href="/frontpages"><img src="<?= STATIC_SERVER ?>/template/default/img/nav-home.png" width="16" height="16" alt="">Diễn đàn</a>
+            </li>
+            <li class="divider"></li>
+			
+			<?php 
+			if (empty($this->user->username)) {
+			?>
+        	<li class="float-right">
+            		<a href="<?=LINK_LOGIN?>?ref=<?=urlencode($this->currentURL)?>"><img src="<?= STATIC_SERVER ?>/template/default/img/key.png" width="16" height="16" alt="">Đăng nhập</a>               
+            </li>
+            <li class="divider float-right"></li>
+			
+			<li class="float-right">
+					<a href="<?=LINK_REG?>?ref=<?=urlencode($this->currentURL)?>"><img src="<?= STATIC_SERVER ?>/template/default/img/add.png" width="16" height="16" alt="">Đăng ký</a>
+			</li>
+			<li class="divider float-right"></li>
+			<?php } 	else	{	?>
+			<li class="float-right">
+				<p style="margin: 18px 10px;">
+            		Xin chào <b><?=$this->user->username?></b>, <span class="s_logout" onclick="location.href = '<?=LINK_LOGOUT?>';" >Thoát</span>
+				</p>
+            </li>
+            <li class="divider float-right"></li>
+			<style>
+				.s_logout:hover {
+					cursor: pointer;
+					text-decoration: underline;
+				}
+			</style>
+			<?php } ?>
+			<!--	
+			<li class="float-right">
+				<a href="#"><img src="<= STATIC_SERVER ?>/template/default/img/search.png" width="16" height="16" alt="">Search</a>				
+			</li>
+			<li class="divider float-right"></li>
+           
+			<li class="float-right">
+				<a href="/frontpages/listmembers"><img src="<?= STATIC_SERVER ?>/template/default/img/nav-members.png" width="16" height="16" alt="">Thành viên</a>
+			</li>
+			<li class="divider float-right"></li>
+              -->
+
+		</ul>
+	</div>
+    
+    <a name="start_here"></a>
+    <div id="page-body">
+        <div class="contentpadding">
+        
+			<div class="forumlist">
+
+				<?=$this->content?>
+				<br>
+
+			</div>
+
+		</div>
+    
+	</div><!-- /contentpadding -->
+
+
+
+</div><!-- /wrap -->
+
+<div style="clear: both;"></div>
+
+<div class="footer" style="width: 80%;">
+    Powered by <a href="http://<?php echo DOMAIN_NAME ?>"><?php echo DOMAIN_NAME ?></a>
+</div>
+
+
+</div><!-- /noise -->
+
+
+<!--
+<script type="text/javascript" src="<= STATIC_SERVER ?>/template/default/js/forum_fn.js"></script>
+<script type="text/javascript" src="<= STATIC_SERVER ?>/template/default/js/jquery.tipsy.js"></script>
+<script type="text/javascript" src="<= STATIC_SERVER ?>/template/default/js/jquery.hoverIntent.min.js"></script>
+<script type="text/javascript" src="<= STATIC_SERVER ?>/template/default/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="<= STATIC_SERVER ?>/template/default/js/jquery.collapse.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.tip').tipsy({fade: true, gravity: 's'});
+
+    $([window, document]).blur(function(){
+        $('ul.drop').css({display: 'none'});
+    });
+    $("#nav ul li").hoverIntent(function(){
+			$(this).children("ul").slideDown();
+        },function(){
+            $(this).children("ul").slideUp();
+    });
+});
+
+$("body").removeClass("nojs").addClass("js");
+
+</script>
+-->
+</body></html>

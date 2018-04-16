@@ -1,0 +1,101 @@
+<?php
+
+function pagerLink($url, $ext, $page, $title, $class = ''){
+  $url=$url . "?page=" . $page;
+  if ($ext!="")
+  {
+    $url=$url . '&' . $ext;
+  }
+  return '<a href="' . $url . '" class="' . $class . '" >' . $title . '</a>';
+}
+
+$from=$this->currentPage-5;
+if ($from<1)
+{
+	$from=1;
+}
+$to=$this->currentPage+5;
+if ($to>$this->totalPages)
+{
+	$to=$this->totalPages;
+}
+if ($this->ext_param)
+{
+	$ext_param=$this->ext_param;
+}
+else
+{
+	$ext_param="";
+}
+if (!$this->obj)
+{
+	$obj="kết quả";
+}
+else
+{
+	$obj=$this->obj;
+}
+?>
+
+<?php if ($this->totalItems > 0){ ?>
+ <!--Start: PageView-->
+<div id="pag-bottom-block">
+	<div id="pagination-wrap">
+		<nav class="pagination">
+
+        <?php
+		if ($this->totalPages > 1) {
+
+			if ($this->currentPage>1)
+			{
+		?>
+				<span class="pg-item pg-nav-item pg-prev">
+					<?php echo pagerLink($this->url, $ext_param, $this->currentPage - 1, 'Prev', "navbutton"); ?>
+				</span>
+		<?php          
+			}
+			if ($from>1)
+			{
+				echo "&nbsp;...&nbsp;";
+			}
+			for ($page=$from; $page<=$to; $page++)
+			{
+				if ($page==$this->currentPage)
+				{
+			?>
+					<span class="pg-item pg-item-current">
+      					<span class="current"><?php echo $this->currentPage;?></span>
+      				</span>
+			<?php 
+
+				}
+				else
+				{
+					echo '<span class="pg-item">';
+					echo pagerLink($this->url, $ext_param, $page, $page);
+					echo '</span>';
+				}
+
+			}
+			if ($to<$this->totalPages)
+			{
+				echo "&nbsp;...&nbsp;";
+			}
+			if ($this->currentPage<$this->totalPages)
+			{
+			?>
+				<span class="pg-item pg-nav-item pg-next">
+	      			<?php echo pagerLink($this->url, $ext_param, $this->currentPage + 1, 'Next', "navbutton"); ?>
+	      		</span>
+			<?php         
+			}
+		}
+        ?>                                                                             
+
+    	</nav>
+    </div>
+</div>
+<?php } ?>
+<!--End: PageView-->    
+
+ 

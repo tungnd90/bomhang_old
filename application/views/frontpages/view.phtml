@@ -1,0 +1,53 @@
+<?php require_once(APP_PATH . 'helpers/convert.php');    ?>
+<div id="content-wrap" style="visibility: visible; opacity: 1;">
+	<div id="content" style="visibility: visible; opacity: 1; ">
+		<?php if (!empty($this->topic)) { ?>
+		<div id="face">
+			<div class="singlepage old-singlepage">
+        		<div class="entry-wrap">
+					<div class="entry">
+						<header id="single-title-wrap">
+				            <div id="single-title-block">    
+				           		<h1 class="new-single-title"><?php echo $this->topic->title ?></h1>
+				             
+				            	<div class="single-meta-wrap">
+									<div class="single-meta-line"></div>
+
+									<div class="single-meta">
+									   	<!--<span class="new-single-author"></span>
+									    <span class="sm-dot">·</span>
+										-->
+								        <a href="/2015/02/17" class="ns-item-date"><?php echo date("F j, Y",$this->topic->created);  ?></a>
+									</div>
+								</div>           
+							</div>
+				       	</header>
+				       	
+				       	<article class="entry-content">   
+				       		<?php echo $this->topic->content ?>
+				       	</article>
+				       	<div class="aseparator"></div>
+				       	<div id="comments_section">
+				       		<div id="fb-root"></div>
+							<script>(function(d, s, id) {
+							  var js, fjs = d.getElementsByTagName(s)[0];
+							  if (d.getElementById(id)) return;
+							  js = d.createElement(s); js.id = id;
+							  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
+							  fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));</script>
+
+							<fb:comments href="http://hesman.com/view/<?=$this->topic->tid?>" width="100%" numposts="5" colorscheme="light"></fb:comments>
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</div> <!-- content-wrap -->
+  
+</div>
+<?=$this->element("rights")?>
+
+
+

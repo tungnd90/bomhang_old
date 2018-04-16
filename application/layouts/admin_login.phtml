@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="<?= STATIC_SERVER ?>/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="<?= STATIC_SERVER ?>/css/admin_login.css"/>
+	
+	<style>
+		.error {
+			color: red;
+		}
+		input[type="submit"] {
+			margin-right: 7px;
+		}
+		.disabled {
+			display: none;
+		}
+		.phantrang {
+			text-align: center;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="container" style="width: 500px; margin: 100px auto;">
+		<div id="content">
+			<h2>Login</h2>
+			
+			<?php if (!empty($this->error)) { ?>
+			<div style="color: red">
+				<div id="authMessage" class="message"><?=$this->error?></div>
+			</div>
+			<?php } ?>
+
+			<form id="UserSecretloginForm" method="post" action="" accept-charset="utf-8">
+
+				<div class="input text">
+					<label for="UserUsername">Username</label>
+					<input name="username" type="text" class="text" />
+				</div>
+				<div class="input password">
+					<label for="UserPassword">Password</label>
+					<input type="password" name="password" class="text" />
+				</div>
+				<div class="submit"><input type="submit" value="Login"></div>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

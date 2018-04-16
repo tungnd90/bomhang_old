@@ -1,0 +1,54 @@
+<?php 
+if (!empty($this->polls))	{
+?>
+<!--------- POLL ---------->
+<div class="poll-question alert">
+	<form method="POST" action="/frontpages/vote/<?=$this->polls[0]->topic_id?>" >
+		<h4><?=$this->polls[0]->question?></h4>
+		<?php
+			$total = 0;
+			foreach ($this->polls as $k => $poll) {
+				if ($this->is_vote) {
+					$total = $total + intval($poll->count);
+		?>
+				<p style="font-size: 13px; border-bottom: 1px solid #E9DBC7; padding-bottom: 5px; "><span class="radio" style="width: 400px; color: #A33B3B; float: left"><?=$poll->title?></span>: <?=$poll->count?> phiếu</p>
+		<?php
+				}
+				else {
+		?>
+		<label class="radio" for="answer_<?=$poll->aid?>" >
+			<input type="radio" name="aid" id="answer_<?=$poll->aid?>" value="<?=$poll->aid?>" checked />
+			<?=$poll->title?>
+		</label>
+		<?php
+				}
+			}
+		?>
+		
+		<?php 
+			if ($this->is_vote == 0) {
+				if (empty($this->user)) {	
+		?>
+					<p align='center'><b>Bạn phải <a href="<?=LINK_LOGIN?>?ref=<?=urlencode($this->currentURL)?>" >đăng nhập</a> trước khi tiến hành bình chọn.</b></p>
+		<?php
+				}
+				else {
+		?>
+			<p class="submit"><input type="submit" class="btn btn-log btn-signin" value="Hoàn thành"/></p>
+		<?php
+				}
+			}
+			else {
+		?>
+			<p style="font-size: 13px; border-bottom: 1px solid #E9DBC7; padding-bottom: 5px; "><span class="radio" style="width: 400px; color: #A33B3B; float: left"><b>Tổng cộng</b></span>: <b><?=$total?> phiếu</b></p>
+		<?php
+			}
+		?>
+		
+		
+		
+	</form>
+</div>
+<!--------- END : POLL ---------->
+
+<?php } ?>

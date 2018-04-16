@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>
+		Trang quản trị
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--
+	<link rel="stylesheet" type="text/css" href="/css/showcase.css"/>
+	-->
+	<link rel="shortcut icon" href="<?= STATIC_SERVER ?>/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="<?= STATIC_SERVER ?>/css/admin_default.css"/>
+	<script type="text/javascript" src="<?= STATIC_SERVER ?>/js/jquery.js"></script>
+	
+	<style>
+		.error {
+			color: red;
+		}
+		input[type="submit"] {
+			margin-right: 7px;
+		}
+		.disabled {
+			display: none;
+		}
+		.phantrang {
+			text-align: center;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="container">
+		<div id="header1">
+			<h1></h1>
+		</div>
+		<div id="wp_content">
+			<div style="clear: both; margin-right: 20px; padding: 0; width: 95%;"  class="hide_print">
+				<a href="/categories" >Quản lý thư mục</a> | 
+				<a href="/topics" >Quản lý bài viết</a> | 
+				<a href="/users" >User Manager</a> | 
+				<!-- <a href="/banners" >Quản lý banner ảnh</a> |  -->
+				
+			</div>
+			<br />
+
+			<?php 
+			if (!empty($this->error)) {
+				echo "<div class='message' >$this->error</div>";
+			}
+			?>
+			
+			<?=$this->content?>
+			
+		</div>
+		<div id="footer" class="footer hide_print">
+
+		</div>
+	</div>
+</body>
+</html>

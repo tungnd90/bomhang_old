@@ -1,0 +1,64 @@
+<header id="header-wrap">
+  	<div class="long-art"></div>
+  	<div class="content-block">
+	    <a href="/" id="logo">
+	    	<span id="logo-svg-wrap">
+	      	<img width="50" height="50" src="/images/logo.png" />
+	      </span>
+		</a>
+    
+     	<?php 
+		if (!empty($this->lists)) {
+		?>
+	    <nav id="main-menu">
+	    	<?php
+			  $paren_id = 0;
+			  $last_id  = 0;
+			  $last_parent  = 0;
+			  $script = ""; 
+			  $total = 0;
+			  foreach ($this->lists as $k => $li) {
+			?>
+	      	
+	      		<?php
+			    if ($li->parent_id == 0) {
+			      	$link = "#";
+			  	?>
+			  	<div class="mm-parent-item">
+		        	<a class="mm-item roll-link"><span data-title="<?=$li->name?>"><?=$li->name?></span></a>
+		        	<span id="mm-lin-icon" class="icon-menu"></span>
+			        <div class="submenu-item">
+			           	<div class="submenu-content">
+			           		<span class="submenu-hit-area"></span>
+				           	<ul class="drop-menu-list">
+		        <?php
+			      	$last_parent  = 0;
+			      	$last_id      = 0;
+			      	$paren_id = $li->cid;
+			    }
+			    else {
+			      	$link = "/category/".$li->cid.'-'.rewrite_url($li->name).'.html';
+			    ?>
+		        
+
+							<li>
+						  	<a class="parent-category-lnk" href="<?=$link?>"><?=$li->name?></a>
+							</li>
+		         <?php
+				        $last_id = $li->cid;
+
+				    }
+				    
+				    if (empty($this->lists[$k+1]->parent_id)  ||  $this->lists[$k+1]->parent_id == 0 ) {
+				      echo "</ul></div></div></div>";
+				    }
+				    
+				    
+				  }
+
+				?>
+				<a class="mm-item roll-link" href="http://alphaart.vn/forum/"><span data-title="Forum">Forum</span></a>
+	    </nav>
+	    <?php } ?>
+	</div>
+</header>
