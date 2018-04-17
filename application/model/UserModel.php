@@ -14,8 +14,8 @@ class UserModel extends ModelBase
 	}
 
 	public function add($data) {
-		$sql  		= "INSERT INTO $this->_name($this->_key, username, password, group_id, status, created) VALUES (NULL,?,?,1,1,?)";
-		$values 	= array( $data['username'],$data['password'],$data['created']);
+		$sql  		= "INSERT INTO $this->_name($this->_key, username, password, group_id, status, created, md_name, md_id, md_key) VALUES (NULL,?,?,1,1,?,?,?,?)";
+		$values 	= array( $data['username'],$data['password'],$data['created'],$data['md_name'],$data['md_id'],$data['md_key']);
 	
 		$db = $this->getMasterDb();
 		$db->execute($sql,$values);
@@ -58,5 +58,12 @@ class UserModel extends ModelBase
 		
 		return $arr;
 	}
+
+    public function get_by_md_name($name = "")
+    {
+        $sql = 'SELECT md_id FROM users WHERE md_name = ?';
+        $db = $this->getSlaveDb();
+        return $db->getRow($sql, $name);
+    }
 }
 ?>

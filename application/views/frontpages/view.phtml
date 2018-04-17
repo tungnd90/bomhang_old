@@ -1,15 +1,15 @@
 <?php require_once(APP_PATH . 'helpers/convert.php');    ?>
 <div id="content-wrap" style="visibility: visible; opacity: 1;">
-	<div id="content" style="visibility: visible; opacity: 1; ">
+	<div id="content" style="visibility: visible; opacity: 1; margin-right: 0">
 		<?php if (!empty($this->topic)) { ?>
 		<div id="face">
 			<div class="singlepage old-singlepage">
         		<div class="entry-wrap">
 					<div class="entry">
 						<header id="single-title-wrap">
-				            <div id="single-title-block">    
+				            <div id="single-title-block">
 				           		<h1 class="new-single-title"><?php echo $this->topic->title ?></h1>
-				             
+
 				            	<div class="single-meta-wrap">
 									<div class="single-meta-line"></div>
 
@@ -19,11 +19,11 @@
 										-->
 								        <a href="/2015/02/17" class="ns-item-date"><?php echo date("F j, Y",$this->topic->created);  ?></a>
 									</div>
-								</div>           
+								</div>
 							</div>
 				       	</header>
-				       	
-				       	<article class="entry-content">   
+
+				       	<article class="entry-content">
 				       		<?php echo $this->topic->content ?>
 				       	</article>
 				       	<div class="aseparator"></div>
@@ -44,10 +44,65 @@
 			</div>
 		</div>
 		<?php } ?>
-	</div> <!-- content-wrap -->
+
+        <?php
+        if ($this->data) {
+            foreach ($this->data as $data) {
+                $dataPoints = $data['data'];
+        ?>
+<br />
+<br />
+                <script>
+                    window.onload = function () {
+
+                        var chart = new CanvasJS.Chart("chartContainer<?php echo $data['id'] ?>", {
+                            animationEnabled: true,
+                            //theme: "light2",
+                            title:{
+                                text: "Worker: <?php echo $data['name'] ?>"
+                            },
+                            axisX:{
+                                crosshair: {
+                                    enabled: true,
+                                    snapToDataPoint: true
+                                }
+                            },
+                            axisY:{
+                                title: "Hashrate",
+                                crosshair: {
+                                    enabled: true,
+                                    snapToDataPoint: true
+                                }
+                            },
+                            toolTip:{
+                                enabled: false
+                            },
+                            data: [{
+                                type: "area",
+                                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                            }]
+                        });
+                        chart.render();
+
+                    }
+                </script>
+
+                <div id="chartContainer<?php echo $data['id'] ?>" style="height: 370px; width: 100%;"></div>
+
+
+        <?php
+            }
+        }
+        ?>
+
+
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <br />
+        <br />
+    </div> <!-- content-wrap -->
   
 </div>
-<?=$this->element("rights")?>
+
 
 
 

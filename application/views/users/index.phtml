@@ -16,10 +16,11 @@
 				<td><?=$u->uid?></td>
 				<td><?=$u->username?></td>
 				<td>
-					<a href="/users/edit/<?=$u->uid?>">Edit</a> |
+					<a href="/users/pass/<?=$u->uid?>">Change Password</a> |
+					<a href="/users/edit/<?=$u->uid?>">Change MD info</a> |
 					<?php if($_SESSION['User']->uid != $u->uid) { ?>
-					<a href="/users/delete/<?=$u->uid?>" onclick="return confirm('Are you sure');">Delete></a> |
-					<a href="/users/block/<?=$u->uid?>/<?=$u->status?>"><?=($u->status == 1) ? "Active" : "Deactive" ?></a>
+                        | <a href="/users/block/<?=$u->uid?>/<?=$u->status?>"><?=($u->status == 1) ? "Active" : "Deactive" ?></a> |
+                        <a href="/users/delete/<?=$u->uid?>" onclick="return confirm('Are you sure');">Delete</a>
 					<?php } ?>
 				</td>
 		</tr>

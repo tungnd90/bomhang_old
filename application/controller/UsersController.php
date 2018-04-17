@@ -34,6 +34,9 @@ class UsersController extends ActionBase {
 			$username = $this->getPost('username','');
 			$n_pass = $this->getPost('new_password','');
 			$cf_pass = $this->getPost('cf_password','');
+            $md_name = $this->getPost('md_name','');
+            $md_id = (int)$this->getPost('md_id','');
+            $md_key = $this->getPost('md_key','');
 			$error = '';
 
 			if (empty($n_pass) || empty($cf_pass) || empty($username)) {
@@ -50,7 +53,10 @@ class UsersController extends ActionBase {
 				$data = array(
 							'username'=>$username,
 							'password'=>md5($n_pass),
-							'created'=> time()
+							'created'=> time(),
+                            'md_id' => $md_id,
+                            'md_name'=> $md_name,
+                            'md_key'=> $md_key
 						);
 
 				$model->add($data);
@@ -60,8 +66,48 @@ class UsersController extends ActionBase {
 			$this->view->error = $error;
 		}
 	}
+
+    public function EditAction($id = 0) {
+        $this->check_user();
+
+        if ($this->isPost())
+        {
+            $uid = $this->getPost('uid','0');
+            $md_name = $this->getPost('md_name','');
+            $md_id = (int)$this->getPost('md_id','');
+            $md_key = $this->getPost('md_key','');
+            $error = '';
+
+            if ($uid < 1) {
+                $error = 'An error has occurred';
+            }
+            else if (empty($md_id) || empty($md_name) || empty($md_key)) {
+                $error = 'Please complete all information';
+            }
+            else {
+                $model	= $this->loadModel("UserModel");
+                $data = array(
+                    'md_id' => $md_id,
+                    'md_name'=> $md_name,
+                    'md_key'=> $md_key
+                );
+
+                $model->update_by_key($uid, $data);
+                $this->redirect("/users");
+            }
+
+            $this->view->error = $error;
+        }
+
+        $uid 	= $this->getParam('id');
+        $model	= $this->loadModel("UserModel");
+        $user	= $model->get_by_key($uid);
+
+        $this->view->user = $user;
+
+    }
 	
-	public function EditAction($id = 0) {
+	public function PassAction($id = 0) {
 		$this->check_user();
 
 		if ($this->isPost())

@@ -42,7 +42,7 @@ class Bootstrap
 		$this->setupEnvironment();
 		$this->setupDatabase();
 		session_start();
-		$this->setupMemcache();
+//		$this->setupMemcache();
 		//$this->setupSession2();
 		//$this->getSession();
 	}
