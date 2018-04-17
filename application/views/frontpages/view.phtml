@@ -46,6 +46,8 @@
 		<?php } ?>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <?php if ($this->data) { ?>
+            <br />
+            <br />
             <script>
                 window.onload = function () {
         <?php
@@ -87,12 +89,13 @@
         <?php } ?>
                 }
         </script>
+
         <?php } ?>
 
         <?php
 
         foreach ($this->data as $data) { ?>
-            <div id="chartContainer<?php echo $data['id'] ?>" style="height: 370px; width: 100%;"></div>
+            <div id="chartContainer<?php echo $data['id'] ?>" style="height: 370px; width: 100%;"></div><br />
         <?php } ?>
         <br />
         <br />
