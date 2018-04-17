@@ -44,18 +44,17 @@
 			</div>
 		</div>
 		<?php } ?>
-
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <?php if ($this->data) { ?>
+            <script>
+                window.onload = function () {
         <?php
-        if ($this->data) {
             foreach ($this->data as $data) {
                 $dataPoints = $data['data'];
         ?>
-<br />
-<br />
-                <script>
-                    window.onload = function () {
 
-                        var chart = new CanvasJS.Chart("chartContainer<?php echo $data['id'] ?>", {
+
+                        var chart<?php echo $data['id'] ?> = new CanvasJS.Chart("chartContainer<?php echo $data['id'] ?>", {
                             animationEnabled: true,
                             //theme: "light2",
                             title:{
@@ -82,21 +81,19 @@
                                 dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
                             }]
                         });
-                        chart.render();
+                        chart<?php echo $data['id'] ?>.render();
 
-                    }
-                </script>
 
-                <div id="chartContainer<?php echo $data['id'] ?>" style="height: 370px; width: 100%;"></div>
-
+        <?php } ?>
+                }
+        </script>
+        <?php } ?>
 
         <?php
-            }
-        }
-        ?>
 
-
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        foreach ($this->data as $data) { ?>
+            <div id="chartContainer<?php echo $data['id'] ?>" style="height: 370px; width: 100%;"></div>
+        <?php } ?>
         <br />
         <br />
     </div> <!-- content-wrap -->
