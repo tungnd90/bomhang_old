@@ -18,7 +18,7 @@ $connect	= mysql_connect('localhost', $dbConfig['md']['username'], $dbConfig['md
 $db			= mysql_select_db($dbConfig['md']['database'], $connect) or die('Could not select database.');
 
 
-$exp = strtotime("-1 day", now());
+$exp = strtotime("-1 day", time());
 mysql_query("DELETE FROM `stats` WHERE time < ".$exp);
 
 mysql_close($connect);
