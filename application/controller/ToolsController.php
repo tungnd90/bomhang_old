@@ -16,12 +16,12 @@ class ToolsController extends ActionBase {
         $invests = $t_model->selectAll("created desc");
 
         foreach ($invests as $i) {
-            $data = str_replace('}1', '}', $this->getMarket($i->market));
+            $data = str_replace('}1', '}', (string)$this->getMarket($i->market));
             echo $data;
             echo "<br />";
             $market = json_encode($data, true);
             print_r($market);
-            echo $market->result;
+//            echo $market->result;
             die();
             if ($i->current_step == -1) {
                 echo "mua vao lan dau";
