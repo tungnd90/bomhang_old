@@ -86,7 +86,7 @@ class ToolsController extends ActionBase {
         $uri='https://bittrex.com/api/v1.1/public/getticker?market='.$market.'&apikey='.$this->api_key.'&nonce='.$nonce;
         $sign=hash_hmac('sha512',$uri,$this->api_secret);
         $ch = curl_init($uri);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('apisign:'.$sign));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json','apisign:'.$sign));
         $execResult = curl_exec($ch);
         curl_close($ch);
         $obj = ($execResult);
