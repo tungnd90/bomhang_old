@@ -16,12 +16,12 @@ class ToolsController extends ActionBase {
         $invests = $t_model->selectAll("created desc");
 
         foreach ($invests as $i) {
-            $data = substr($this->getMarket($i->market),0,-1);
-            echo $data;
-            echo "<br />";
-            $market = json_decode((string)$data, true);
-            print_r($market);
-//            echo $market->result;
+            $data = $this->getMarket($i->market);
+            echo $bid = $this->getValue("bid", $data);
+            echo $ask = $this->getValue("ask", $data);
+
+            print_r($data);
+
             die();
             if ($i->current_step == -1) {
                 echo "mua vao lan dau";
@@ -89,7 +89,7 @@ class ToolsController extends ActionBase {
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json','apisign:'.$sign));
         $execResult = curl_exec($ch);
         curl_close($ch);
-        $obj = ($execResult);
+        $obj = json_decode($execResult);
         //{"success":true,"message":"","result":{"Bid":0.03341015,"Ask":0.03358766,"Last":0.03358766}}
         return $obj;
     }
@@ -119,64 +119,14 @@ class ToolsController extends ActionBase {
 		$this->redirect('/topics');
 	}
 	
+	private function getValue($key, $str) {
+        $key = '/\"'.$key.'\":(\d+\.)/';
+        if (!preg_match($key, $str, $matches)) {
+            throw new Exception('Unofficial API is broken or user not found');
+        }
 
-	private function bannerValidate() {
-		require_once(APP_LIB . 'ImageLibrary.php');
-		//$this->errors = array();
-
-		$timer = time();
-
-		// Define path of large images and thumbnail images
-		$root_dir = PUB_PATH . 'img' . DS . 'banners' . DS;
-
-		$timer = time();
-		
-		// Preparing to Upload
-		$tempfile = $_FILES["picture"]["tmp_name"];
-		
-		//Check file type
-		$file_parts = pathinfo($_FILES["picture"]["name"]);
-		$filetype = $file_parts['extension'];
-
-		//Check Validate Image
-	 	if ( (strtolower($filetype) != 'jpeg') && (strtolower($filetype) != 'jpg') && (strtolower($filetype) != 'png') && (strtolower($filetype) != 'gif') )
-	 	{
-			$this->view->error = "Chỉ hỗ trợ định dạng ảnh gif, jpg, png";
-			return false;
-	 	}
-		
-		$filename = $timer."_".str_replace("%20", "_", trim($_FILES["picture"]["name"]));
-
-		//Get destination file
-		$dest = $root_dir . $filename;
-		$thumb = $root_dir . "thumb_".$filename;
-
-		// Upload Images to host
-		if ($tempfile) {
-			if (move_uploaded_file($tempfile, $dest)) {
-				$detail = ImageLibrary::imageGetInfo($dest);
-				
-				$width = 140;
-				//$height = $detail['height']*60/$detail['width'];
-				$height = 120;
-				
-				ImageLibrary::imageResize($dest, $thumb, $width, $height);
-			} else {
-				$this->view->error = "Có lỗi upload lên server";
-				return false;
-			}
-		}
-
-		return $filename;
-	}
-
-	private function delete_image($filename) {
-		$root_dir = PUB_PATH . 'img' . DS . 'banners' . DS;
-		$dest = $root_dir . $filename;
-		$thumb = $root_dir . "thumb_".$filename;
-		@unlink($dest);
-		@unlink($thumb);
-	}
+        return $matches[1];
+    }
 }
 
 ?>
