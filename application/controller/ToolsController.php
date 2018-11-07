@@ -16,6 +16,8 @@ class ToolsController extends ActionBase {
         $invests = $t_model->selectAll("created desc");
 
         foreach ($invests as $i) {
+            echo $this->getMarket($i->market);
+            echo "<br />";
             $market = json_encode($this->getMarket($i->market), true);
             print_r($market);
             echo $market->result;
