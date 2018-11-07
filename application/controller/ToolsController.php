@@ -16,7 +16,7 @@ class ToolsController extends ActionBase {
         $invests = $t_model->selectAll("created desc");
 
         foreach ($invests as $i) {
-            $data = $this->getMarket($i->market);
+            $data = (string)$this->getMarket($i->market);
             echo $bid = $this->getValue("Bid", $data);
             echo $ask = $this->getValue("Ask", $data);
 
