@@ -1,0 +1,47 @@
+<div class="container clearfix">
+    <div class="title">
+        <h2>Tạo bài viết</h2>
+    </div>
+
+	<form method="POST" action=""  enctype="multipart/form-data">
+	<table border="1" width="500" cellpadding="10">
+		<tr>
+			<th>Tên </th>
+			<td><input type="text" name="name" id="name" value="" /></td>
+		</tr>
+
+		<tr>
+			<th>Market </th>
+			<td><input type="text" name="market" id="market" value="" /></td>
+		</tr>
+
+        <tr>
+            <th>coin </th>
+            <td><input type="text" name="coin" id="coin" value="" /></td>
+        </tr>
+
+		<tr>
+			<th>min_price </th>
+			<td><input type="text" name="min_price" id="min_price" value="" /></td>
+		</tr>
+
+		<tr>
+			<th>max_step </th>
+			<td><input type="text" name="max_step" id="max_step" value="" /></td>
+		</tr>
+
+		<tr>
+			<th>profit (%) </th>
+			<td><input type="text" name="step" id="step" value="" /></td>
+		</tr>
+
+		<tr>
+			<th>		</th>
+			<td><input type="submit" value="Hoàn thành" /></td>
+		</tr>
+	</table>
+	</form>
+
+</div>
+
+<?php $this->element("tiny_mce"); ?>
