@@ -89,7 +89,7 @@ class ToolsController extends ActionBase {
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json','apisign:'.$sign));
         $execResult = curl_exec($ch);
         curl_close($ch);
-        $obj = json_decode($execResult);
+        $obj = ($execResult);
         //{"success":true,"message":"","result":{"Bid":0.03341015,"Ask":0.03358766,"Last":0.03358766}}
         return $obj;
     }
