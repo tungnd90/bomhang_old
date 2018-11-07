@@ -19,7 +19,7 @@ class ToolsController extends ActionBase {
             $data = substr($this->getMarket($i->market),0,-1);
             echo $data;
             echo "<br />";
-            $market = json_decode($data, true);
+            $market = json_decode((string)$data, true);
             print_r($market);
 //            echo $market->result;
             die();
