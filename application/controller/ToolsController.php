@@ -17,8 +17,8 @@ class ToolsController extends ActionBase {
 
         foreach ($invests as $i) {
             $data = $this->getMarket($i->market);
-            echo $bid = $this->getValue("bid", $data);
-            echo $ask = $this->getValue("ask", $data);
+            echo $bid = $this->getValue("Bid", $data);
+            echo $ask = $this->getValue("Ask", $data);
 
             print_r($data);
 
@@ -120,12 +120,12 @@ class ToolsController extends ActionBase {
 	}
 	
 	private function getValue($key, $str) {
-        $key = '/\"'.$key.'\":(\d+\.)/';
-        if (!preg_match($key, $str, $matches)) {
+        $str_key = '/"'.$key.'":(\d*\.\d+)/';
+        if (!preg_match($str_key, $str, $matches)) {
             throw new Exception('Unofficial API is broken or user not found');
         }
 
-        return $matches[1];
+        echo $matches[1];
     }
 }
 
