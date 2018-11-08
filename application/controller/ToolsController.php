@@ -16,9 +16,7 @@ class ToolsController extends ActionBase {
         $invests = $t_model->selectAll("created desc");
 
         foreach ($invests as $i) {
-            $data = (string)$this->getMarket($i->market);
-            echo $bid = $this->getValue("Bid", $data);
-            echo $ask = $this->getValue("Ask", $data);
+            $data = $this->getMarket($i->market);
 
             print_r($data);
 
@@ -82,16 +80,11 @@ class ToolsController extends ActionBase {
     }
 
     private function getMarket($market) {
-        $nonce=time();
-        $uri='https://bittrex.com/api/v1.1/public/getticker?market='.$market.'&apikey='.$this->api_key.'&nonce='.$nonce;
-        $sign=hash_hmac('sha512',$uri,$this->api_secret);
+        $uri='https://bittrex.com/api/v1.1/public/getticker?market='.$market;
         $ch = curl_init($uri);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json','apisign:'.$sign));
         $execResult = curl_exec($ch);
         curl_close($ch);
-        $obj = ($execResult);
-        //{"success":true,"message":"","result":{"Bid":0.03341015,"Ask":0.03358766,"Last":0.03358766}}
-        return $obj;
+        return json_decode($execResult);
     }
 	
 	public function AddAction() {
@@ -118,15 +111,7 @@ class ToolsController extends ActionBase {
 
 		$this->redirect('/topics');
 	}
-	
-	private function getValue($key, $str) {
-        $str_key = '/"'.$key.'":(\d*\.\d+)/';
-        if (!preg_match($str_key, $str, $matches)) {
-            throw new Exception('Unofficial API is broken or user not found');
-        }
 
-        echo $matches[1];
-    }
 }
 
 ?>
