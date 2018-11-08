@@ -83,8 +83,8 @@ class ToolsController extends ActionBase {
         $uri='https://bittrex.com/api/v1.1/public/getticker?market='.$market;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $uri);
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        echo $execResult = curl_exec($ch);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $execResult = curl_exec($ch);
         curl_close($ch);
         return json_decode($execResult);
     }
